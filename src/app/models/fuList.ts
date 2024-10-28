@@ -58,7 +58,10 @@ export class FuList {
 				continue;
 			}
 			if(!(set.stype == SetType.Jantou)) {
-				fu = new SetFu(set.stype, set.is_open, set.tile.isSimple(), this.languageService.currentLanguage);
+        var isShanpon = hand.agariSet.stype == set.stype;
+        var isRon = this.extraInfoService.buttonList.isToggled("Ron")
+        var isOpen = set.is_open || (isShanpon && isRon)
+				fu = new SetFu(set.stype, isOpen, set.tile.isSimple(), this.languageService.currentLanguage);
 			} else {
 				fu = new Pair(this.extraInfoService, set.tile, this.languageService.currentLanguage);
 				if(!fu.name) {
